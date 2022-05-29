@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const HomePage = () => {
+const HomePageRedirect = () => {
   const router = useRouter();
-
-  const id = Math.floor(Math.random() * 10000000);
+  const { id } = router.query;
 
   useEffect(() => {
     router.push({
@@ -16,4 +15,4 @@ const HomePage = () => {
   return <></>;
 };
 
-export default HomePage;
+export default HomePageRedirect;
