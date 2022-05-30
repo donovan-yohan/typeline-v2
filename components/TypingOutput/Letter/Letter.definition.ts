@@ -1,13 +1,18 @@
 export interface LetterProps {
   expected: string;
   actual: string;
+  typed: boolean;
   active: boolean;
+  isLast: boolean;
   wordPassed: boolean;
+  wordActive: boolean;
   wordPerfect?: boolean;
-  letterStyle?: LetterStyle;
+  wordOverflow?: boolean;
+  letterClassnames?: LetterClasses;
+  parentRef: React.RefObject<HTMLDivElement>;
 }
 
-interface LetterStyle {
+interface LetterClasses {
   correct: string;
   incorrect: string;
   perfect: string;

@@ -1,9 +1,11 @@
 import { SyntheticEvent, useState } from "react";
+import { BACKSPACE_CHAR } from "../../utils/utils";
 import { TypingInputProps } from "./TypingInput.definition";
 
 export const TypingInput = (props: TypingInputProps) => {
+  const { onType } = props;
   const [inputString, setInputString] = useState("");
-  //   const [keys, setKeys] = useAtom(keypressAtom);
+  const [startTime, setStartTime] = useState<number | undefined>();
 
   const onSelect = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement;
@@ -32,8 +34,19 @@ export const TypingInput = (props: TypingInputProps) => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key.length > 1 && e.key != "Backspace") e.preventDefault();
-    // else setKeys((keys) => [...keys, { key: e.key, timestamp: Date.now() }]);
+    if (e.key.length > 1 && e.key != "Backspace") {
+      e.preventDefault();
+      return;
+    }
+
+    const key = e.key === "Backspace" ? BACKSPACE_CHAR : e.key;
+    const timestamp = startTime ? Date.now() - startTime : 0;
+
+    if (startTime === undefined) {
+      setStartTime(Date.now());
+    }
+
+    onType?.({ key, timestamp });
   };
 
   const onMouseDown = (e: React.MouseEvent) => {

@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { generateSeed } from "../utils/wordGenerator/wordGenerator.utils";
 
 const HomePage = () => {
   const router = useRouter();
 
-  const id = Math.floor(Math.random() * 10000000);
+  const id = generateSeed();
 
   useEffect(() => {
     router.push({

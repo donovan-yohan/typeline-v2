@@ -32,18 +32,34 @@ export const LightBase: MantineTheme = {
   }
 };
 
-interface ShadeTuple {
+interface ShadeObject {
   shade: Shade;
   offset: number;
+  grayOffset: number;
 }
 
-export const getPrimaryShade = (theme: MantineTheme): ShadeTuple => {
-  const offset = theme.colorScheme === "light" ? -2 : 2;
+const secondaryColourOffset = 4;
+const grayColourOffset = 2;
+
+export const getPrimaryShade = (theme: MantineTheme): ShadeObject => {
+  const offset =
+    theme.colorScheme === "light" ? -secondaryColourOffset : secondaryColourOffset;
+
+  const grayOffset =
+    theme.colorScheme === "light" ? -grayColourOffset : grayColourOffset - 1;
   if ((theme.primaryShade as MantinePrimaryShade).light == undefined) {
-    return { shade: theme.primaryShade as Shade, offset };
+    return { shade: theme.primaryShade as Shade, offset, grayOffset };
   } else {
     return theme.colorScheme === "light"
-      ? { shade: (theme.primaryShade as MantinePrimaryShade).light as Shade, offset }
-      : { shade: (theme.primaryShade as MantinePrimaryShade).dark as Shade, offset };
+      ? {
+          shade: (theme.primaryShade as MantinePrimaryShade).light as Shade,
+          offset,
+          grayOffset
+        }
+      : {
+          shade: (theme.primaryShade as MantinePrimaryShade).dark as Shade,
+          offset,
+          grayOffset
+        };
   }
 };

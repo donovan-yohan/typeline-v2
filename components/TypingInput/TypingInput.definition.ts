@@ -1,3 +1,5 @@
+import { KeypressType } from "../../interfaces/typeline";
+
 export interface TypingInputProps {
-  expected?: string;
+  onType?: (value: KeypressType) => void;
 }

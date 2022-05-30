@@ -41,14 +41,15 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
             },
             {
               "@font-face": {
-                fontFamily: "Montserrat",
-                src: `url('/fonts/Montserrat-Regular.ttf')`
+                fontFamily: "Nunito",
+                src: `url('/fonts/Nunito-Regular.ttf')`
               }
             },
             {
               "@font-face": {
-                fontFamily: "Montserrat",
-                src: `url('/fonts/Montserrat-ExtraBold.ttf')`
+                fontFamily: "Nunito",
+                src: `url('/fonts/Nunito-ExtraBold.ttf')`,
+                fontWeight: "bold"
               }
             }
           ]}
@@ -56,10 +57,27 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <MantineProvider
           theme={{
             colorScheme,
-            fontFamily: "Comfortaa",
-            headings: { fontFamily: "Comfortaa" },
+            colors: {
+              dark: [
+                "#dedee4",
+                "#b6b8bc",
+                "#909296",
+                "#5C5F66",
+                "#373A40",
+                "#2C2E33",
+                "#25262B",
+                "#101113",
+                "#101113",
+                "#101113"
+              ]
+            },
+            fontFamily: "Nunito",
+            headings: { fontFamily: "Nunito" },
+            primaryColor: "teal",
+            primaryShade: { light: 7, dark: 5 },
             other: {
-              errorColor: "red"
+              errorColor: "orange",
+              highlightAnimation: "all 0.25s cubic-bezier(0.33, 0, 0, 1)"
             }
           }}
           withGlobalStyles
