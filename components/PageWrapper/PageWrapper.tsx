@@ -1,4 +1,4 @@
-import { Text, Anchor, Header, Footer } from "@mantine/core";
+import { Header, Footer } from "@mantine/core";
 import { PageWrapperProps } from "./PageWrapper.definition";
 import { useStyles } from "./PageWrapper.style";
 

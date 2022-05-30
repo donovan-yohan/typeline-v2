@@ -1,7 +1,7 @@
 import { Text } from "@mantine/core";
 import { useSetAtom } from "jotai";
 import React, { useEffect, useRef } from "react";
-import { useEffectOnce, useUpdateEffect } from "usehooks-ts";
+import { useUpdateEffect } from "usehooks-ts";
 import { useOffset } from "../../../hooks/useOffset";
 import { letterOffsetAtom } from "../TypingOutput.atom";
 import { LetterProps } from "./Letter.definition";
