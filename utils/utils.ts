@@ -16,6 +16,10 @@ export const keypressToString = (keypresses: KeypressType[]): string => {
   }, "");
 };
 
+export const keypressToArray = (keypresses: KeypressType[]): string[] => {
+  return keypressToString(keypresses).split(" ");
+};
+
 export const createTypeUrl = (seed = generateSeed(), time = 30) => ({
   pathname: "/type",
   query: {

@@ -3,7 +3,7 @@ import { useSetAtom } from "jotai";
 import React, { useEffect, useRef } from "react";
 import { useUpdateEffect } from "usehooks-ts";
 import { useOffset } from "../../../hooks/useOffset";
-import { letterOffsetAtom } from "../TypingOutput.atom";
+import { letterOffsetAtom } from "./Letter.atom";
 import { LetterProps } from "./Letter.definition";
 import { useLetterStyles } from "./Letter.style";
 

@@ -3,13 +3,13 @@ import React, { useRef } from "react";
 import { useCounter, useIsomorphicLayoutEffect, useUpdateEffect } from "usehooks-ts";
 import { useOffset } from "../../../hooks/useOffset";
 import { Letter } from "../Letter/Letter";
-import { currentWordCorrectAtom, wordOffsetAtom } from "../TypingOutput.atom";
+import { currentWordCorrectAtom, currentWordRefAtom, wordOffsetAtom } from "./Word.atom";
 import { WordProps } from "./Word.definition";
 import { useWordStyles } from "./Word.style";
 
 export const Word = React.memo((props: WordProps) => {
   const { expected, actual, id, passed, current, parentRef } = props;
-  const { classes } = useWordStyles();
+  const { cx, classes } = useWordStyles();
 
   const { count: charactersTyped, increment } = useCounter(0);
   const perfect = expected === actual && charactersTyped === expected.length && passed;
@@ -17,8 +17,13 @@ export const Word = React.memo((props: WordProps) => {
   const ref = useRef(null);
   const offset = useOffset(parentRef, ref, [current]);
 
+  const setCurrentWordRef = useSetAtom(currentWordRefAtom);
   const setWordOffset = useSetAtom(wordOffsetAtom);
   const setCurrentWordCorrect = useSetAtom(currentWordCorrectAtom);
+
+  useUpdateEffect(() => {
+    current && setCurrentWordRef(ref);
+  }, [current]);
 
   useUpdateEffect(() => {
     increment();
@@ -35,7 +40,10 @@ export const Word = React.memo((props: WordProps) => {
   const overflow = actual.slice(expected.length);
 
   return (
-    <span className={classes.word} ref={ref}>
+    <span
+      className={cx(classes.word, { [classes.incorrect]: passed && actual !== expected })}
+      ref={ref}
+    >
       <>
         {expected.split("").map((char, index) => (
           <Letter

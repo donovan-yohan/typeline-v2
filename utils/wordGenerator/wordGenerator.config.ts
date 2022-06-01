@@ -20,7 +20,7 @@ export const MAX_PUNCTUATION_SPACE = 15;
 
 export const MAX_SYMBOL_SPACE = 15;
 
-export const MIN_WORDS_AHEAD = 50;
+export const MIN_WORDS_AHEAD = 40;
 
 export const PUNCTUATION_TABLE = [
   { char: ".", probability: 0.392, placement: CHARACTER_PLACEMENT.AFTER },

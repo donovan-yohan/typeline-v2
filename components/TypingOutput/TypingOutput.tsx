@@ -1,16 +1,13 @@
 import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 import { useBoolean, useTimeout } from "usehooks-ts";
-import { TypingCursor } from "./TypeCursor/TypingCursor";
+import { letterOffsetAtom } from "./Letter/Letter.atom";
+import { TypingCursor } from "./TypingCursor/TypingCursor";
 import { TypingHighlight } from "./TypingHighlight/TypingHighlight";
-import {
-  currentWordCorrectAtom,
-  letterOffsetAtom,
-  wordOffsetAtom
-} from "./TypingOutput.atom";
 import { TypingOutputProps } from "./TypingOutput.definition";
 import { useTypingOutputStyles } from "./TypingOutput.style";
 import { Word } from "./Word/Word";
+import { currentWordCorrectAtom, wordOffsetAtom } from "./Word/Word.atom";
 
 const CURSOR_TIMEOUT = 900;
 
@@ -52,15 +49,15 @@ export const TypingOutput = (props: TypingOutputProps) => {
         correct={currentWordCorrect}
         animate={animateCursor}
       />
-      {expected.split(" ").map((expected, index) => {
-        const actualWord = actual.split(" ")[index];
+      {expected.map((expected, index) => {
+        const actualWord = actual[index];
         return (
           <Word
             id={`word-${index}`}
             actual={actualWord || ""}
             expected={expected}
-            passed={index < actual.split(" ").length - 1}
-            current={index === actual.split(" ").length - 1}
+            passed={index < actual.length - 1}
+            current={index === actual.length - 1}
             key={`word-${index}`}
             parentRef={ref}
           />

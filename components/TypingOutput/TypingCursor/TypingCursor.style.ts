@@ -1,3 +1,4 @@
+import { css } from "@emotion/css";
 import { createStyles } from "@mantine/core";
 import { blink } from "../../../styles/animations.style";
 import { getPrimaryShade } from "../../../styles/themes";
@@ -14,10 +15,10 @@ export const useTypingCursorStyles = createStyles(
           : theme.colors[theme.other.errorColor][shade],
         top: offset?.top || 0,
         left: isLast ? offset?.right || 0 : offset?.left || 0,
-        width: "0.1em",
+        width: "0.15em",
         height: offset?.height || 0,
-        transition: theme.other.highlightAnimation,
-        animation: animate ? `1.05s cubic-bezier(0.9, 0, 0, 0.9) infinite ${blink}` : ""
+        transition: "all 0.13s ease",
+        animation: `1.05s cubic-bezier(0.9, 0, 0, 0.9) infinite ${animate && `${blink}`}`
       }
     };
   }

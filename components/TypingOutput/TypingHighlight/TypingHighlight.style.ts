@@ -15,6 +15,7 @@ export const useTypingHighlightStyles = createStyles(
         left: offset?.left || 0,
         width: offset?.width || 0,
         height: offset?.height || 0,
+        borderRadius: 4,
         transition: theme.other.highlightAnimation,
         opacity: 0.5
       }

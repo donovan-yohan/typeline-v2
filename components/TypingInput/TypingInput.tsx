@@ -17,8 +17,15 @@ export const TypingInput = (props: TypingInputProps) => {
     const len = input.value.length;
     const value = input.value.charAt(len - 1);
 
+    const timestamp = startTime ? Date.now() - startTime : 0;
+
+    if (startTime === undefined) {
+      setStartTime(Date.now());
+    }
+
     if (inputString.length > len) {
       setInputString(input.value);
+      onType?.({ key: BACKSPACE_CHAR, timestamp });
     } else {
       if (len === 1) {
         // Handle first button press
@@ -30,23 +37,12 @@ export const TypingInput = (props: TypingInputProps) => {
         // Handle space
       }
       setInputString((inputString) => inputString + value);
+      onType?.({ key: value, timestamp });
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key.length > 1 && e.key != "Backspace") {
-      e.preventDefault();
-      return;
-    }
-
-    const key = e.key === "Backspace" ? BACKSPACE_CHAR : e.key;
-    const timestamp = startTime ? Date.now() - startTime : 0;
-
-    if (startTime === undefined) {
-      setStartTime(Date.now());
-    }
-
-    onType?.({ key, timestamp });
+    if (e.key.length > 1 && e.key != "Backspace") e.preventDefault();
   };
 
   const onMouseDown = (e: React.MouseEvent) => {
