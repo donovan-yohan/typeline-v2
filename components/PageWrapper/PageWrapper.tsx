@@ -1,4 +1,4 @@
-import { Header, Footer } from "@mantine/core";
+import { Header, Footer, Paper } from "@mantine/core";
 import { PageWrapperProps } from "./PageWrapper.definition";
 import { useStyles } from "./PageWrapper.style";
 
@@ -8,7 +8,7 @@ export function PageWrapper(props: PageWrapperProps) {
   return (
     <div className={classes.pageWrapper}>
       <Header height={"64px"}>typeline</Header>
-      <div className={classes.contentWrapper}>{props.children}</div>
+      <Paper className={classes.contentWrapper}>{props.children}</Paper>
       <Footer height={"64px"}>Copyright</Footer>
     </div>
   );

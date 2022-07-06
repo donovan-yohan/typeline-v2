@@ -1,17 +1,12 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { generateSeed } from "../utils/wordGenerator/wordGenerator.utils";
+import { createTypeUrl } from "../utils/utils";
 
 const HomePage = () => {
   const router = useRouter();
 
-  const id = generateSeed();
-
   useEffect(() => {
-    router.push({
-      pathname: "/test",
-      query: { seed: id }
-    });
+    router.push(createTypeUrl());
   }, []);
 
   return <></>;

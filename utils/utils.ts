@@ -1,8 +1,15 @@
 import { MutableRefObject } from "react";
-import { KeypressType } from "../interfaces/typeline";
+import { KeypressType, StatType } from "../interfaces/typeline";
 import { generateSeed } from "./wordGenerator/wordGenerator.utils";
 
 export const BACKSPACE_CHAR = "⌫";
+
+export const EmptyStatType: StatType = {
+  correct: 0,
+  incorrect: 0,
+  corrected: 0,
+  incorrectWords: []
+};
 
 export const keypressToString = (keypresses: KeypressType[]): string => {
   const keys = keypresses.map((keypress) => keypress.key);
@@ -21,9 +28,8 @@ export const keypressToArray = (keypresses: KeypressType[]): string[] => {
 };
 
 export const createTypeUrl = (seed = generateSeed(), time = 30) => ({
-  pathname: "/type",
+  pathname: `/${seed}`,
   query: {
-    s: seed,
     t: time
   }
 });
