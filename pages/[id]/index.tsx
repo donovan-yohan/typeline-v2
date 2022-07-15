@@ -1,19 +1,13 @@
-import { ColorSchemeToggle } from "../../components/ColorSchemeToggle/ColorSchemeToggle";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
-import { TypingInput } from "../../components/TypingInput/TypingInput";
-import { Center, Container, Stack } from "@mantine/core";
-import { TypingOutput } from "../../components/TypingOutput/TypingOutput";
-import { keypressAtom, wordGeneratorAtom } from "../../atoms/state.atom";
+import { Center } from "@mantine/core";
+import { wordGeneratorAtom } from "../../atoms/state.atom";
 import { useAtom } from "jotai";
-import { KeypressType } from "../../interfaces/typeline";
-import { createTypeUrl, keypressToArray } from "../../utils/utils";
+import { createTypeUrl } from "../../utils/utils";
 import { useRouter } from "next/router";
-import { useDebounce } from "usehooks-ts";
 import { useEffect } from "react";
 import { WordGenerator } from "../../utils/wordGenerator/wordGenerator";
 import { generateSeed } from "../../utils/wordGenerator/wordGenerator.utils";
-import { useWordGenerator } from "../../hooks/useWordGenerator";
-import { TypingWrapper } from "../../components/TypingWrapper/TypingWrapper";
+import { GameContainer } from "../../components/GameContainer/GameContainer";
 
 export default function HomePage() {
   const router = useRouter();
@@ -27,30 +21,12 @@ export default function HomePage() {
     setWordGenerator(new WordGenerator(seed, undefined, time));
   }, [id, t]);
 
-  const [keys, setKeys] = useAtom(keypressAtom);
-  const [wordGenerator, setWordGenerator] = useAtom(wordGeneratorAtom);
-
-  const actual = keypressToArray(keys);
-
-  const onType = ({ key, timestamp }: KeypressType) => {
-    setKeys((keys) => [...keys, { key, timestamp }]);
-  };
-
-  const expectedArray = useWordGenerator(wordGenerator, actual.length);
-  const debouncedExpected = useDebounce(expectedArray, 10);
+  const [, setWordGenerator] = useAtom(wordGeneratorAtom);
 
   return (
     <PageWrapper>
-      <ColorSchemeToggle />
       <Center>
-        <Stack>
-          <TypingInput onType={onType} />
-          <Container size={"md"}>
-            <TypingWrapper>
-              <TypingOutput expected={debouncedExpected} actual={actual} />
-            </TypingWrapper>
-          </Container>
-        </Stack>
+        <GameContainer />
       </Center>
     </PageWrapper>
   );

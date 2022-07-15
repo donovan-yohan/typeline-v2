@@ -3,7 +3,7 @@ import { BACKSPACE_CHAR } from "../../utils/utils";
 import { TypingInputProps } from "./TypingInput.definition";
 
 export const TypingInput = (props: TypingInputProps) => {
-  const { onType } = props;
+  const { disabled, onType } = props;
   const [inputString, setInputString] = useState("");
   const [startTime, setStartTime] = useState<number | undefined>();
 
@@ -42,7 +42,7 @@ export const TypingInput = (props: TypingInputProps) => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key.length > 1 && e.key != "Backspace") e.preventDefault();
+    if ((e.key.length > 1 && e.key != "Backspace") || disabled) e.preventDefault();
   };
 
   const onMouseDown = (e: React.MouseEvent) => {

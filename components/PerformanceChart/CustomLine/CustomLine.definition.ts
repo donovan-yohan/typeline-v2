@@ -1,7 +1,7 @@
+import { ChartDataset, LineControllerDatasetOptions } from "chart.js";
+
 export interface CustomLineProps {
-    data:
-    options: 
-    chartHeight: string;
-
-
+  data: ChartDataset;
+  options: LineControllerDatasetOptions;
+  chartHeight: string;
 }

@@ -10,11 +10,7 @@ import { useTypingWrapperStyles } from "./TypingWrapper.style";
 
 export const TypingWrapper = (props: TypingWrapperProps) => {
   const { children } = props;
-  const {
-    value: scroll,
-    setTrue: enableScroll,
-    setFalse: disableScroll
-  } = useBoolean(false);
+  const { value: scroll } = useBoolean(false);
 
   const { classes } = useTypingWrapperStyles({ scroll });
 

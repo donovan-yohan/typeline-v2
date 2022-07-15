@@ -60,6 +60,7 @@ export const TypingOutput = (props: TypingOutputProps) => {
             current={index === actual.length - 1}
             key={`word-${index}`}
             parentRef={ref}
+            index={index}
           />
         );
       })}

@@ -1,8 +1,4 @@
 import React, { useContext, useState, useEffect, useRef, MouseEvent } from "react";
-import Context from "./context";
-import { formatTime } from "../utils/formatTime";
-import CustomLine from "./customLine";
-import { ChartStat } from "pages";
 import { defaults, Chart, LegendItem, TooltipItem, ChartData } from "chart.js";
 
 interface Props {

@@ -819,7 +819,6 @@ export default [
   "yard",
   "Sean",
   "pour",
-  "tion",
   "dust",
   "wiki",
   "Kent",

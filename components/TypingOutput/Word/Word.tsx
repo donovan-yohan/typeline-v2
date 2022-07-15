@@ -41,7 +41,9 @@ export const Word = React.memo((props: WordProps) => {
 
   return (
     <span
-      className={cx(classes.word, { [classes.incorrect]: passed && actual !== expected })}
+      className={cx(classes.word, {
+        [classes.incorrect]: passed && actual !== expected
+      })}
       ref={ref}
     >
       <>

@@ -5,4 +5,5 @@ export interface WordProps {
   passed: boolean;
   current: boolean;
   parentRef: React.RefObject<HTMLDivElement>;
+  index: number;
 }
