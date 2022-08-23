@@ -3,6 +3,7 @@ import { useScrollIntoView } from "@mantine/hooks";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { useBoolean } from "usehooks-ts";
+import { inputRefAtom } from "../../atoms/state.atom";
 import { easeOutExpo } from "../../utils/styles/animations.utils";
 import { currentWordRefAtom, wordOffsetAtom } from "../TypingOutput/Word/Word.atom";
 import { TypingWrapperProps } from "./TypingWrapper.definition";
@@ -18,6 +19,7 @@ export const TypingWrapper = (props: TypingWrapperProps) => {
 
   const [ref] = useAtom(currentWordRefAtom);
   const [highlightOffset] = useAtom(wordOffsetAtom);
+  const [inputRef] = useAtom(inputRefAtom);
 
   const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView({
     easing: (t: number) => easeOutExpo(t),
@@ -36,7 +38,13 @@ export const TypingWrapper = (props: TypingWrapperProps) => {
   }, [lineOffset]);
 
   return (
-    <Paper ref={scrollableRef} className={classes.scrollArea}>
+    <Paper
+      ref={scrollableRef}
+      className={classes.scrollArea}
+      onClick={() => {
+        inputRef?.current?.focus();
+      }}
+    >
       {children}
     </Paper>
   );

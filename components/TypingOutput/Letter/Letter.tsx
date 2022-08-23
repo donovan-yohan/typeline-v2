@@ -1,6 +1,6 @@
 import { Text } from "@mantine/core";
 import { useSetAtom } from "jotai";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useUpdateEffect } from "usehooks-ts";
 import { useOffset } from "../../../hooks/useOffset";
 import { letterOffsetAtom } from "./Letter.atom";
@@ -20,7 +20,8 @@ export const Letter = React.memo((props: LetterProps) => {
     letterClassnames,
     parentRef
   } = props;
-  const { classes, cx } = useLetterStyles({ actual, isLast });
+  const [actualMemo, setActualMemo] = useState(actual);
+  const { classes, cx } = useLetterStyles({ actual: actualMemo, isLast });
 
   const letter = expected ? expected : actual;
 
@@ -66,6 +67,11 @@ export const Letter = React.memo((props: LetterProps) => {
   useEffect(() => {
     if (overflow && wordActive) setLetterOffset({ offset, isLast });
   }, [offset, active, actual]);
+
+  // save actual letter
+  useEffect(() => {
+    actual && setActualMemo(actual);
+  }, [actual]);
 
   return (
     <Text ref={ref} component='span' className={className}>

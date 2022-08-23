@@ -1,4 +1,6 @@
-import { SyntheticEvent, useState } from "react";
+import { useAtom } from "jotai";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
+import { inputRefAtom } from "../../atoms/state.atom";
 import { BACKSPACE_CHAR } from "../../utils/utils";
 import { TypingInputProps } from "./TypingInput.definition";
 
@@ -6,6 +8,8 @@ export const TypingInput = (props: TypingInputProps) => {
   const { disabled, onType } = props;
   const [inputString, setInputString] = useState("");
   const [startTime, setStartTime] = useState<number | undefined>();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [, setInputRef] = useAtom(inputRefAtom);
 
   const onSelect = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement;
@@ -50,8 +54,19 @@ export const TypingInput = (props: TypingInputProps) => {
     const input = e.target as HTMLInputElement;
     input.focus();
   };
+
+  // autofocus on load
+  useEffect(() => {
+    if (inputRef) {
+      setInputRef(inputRef);
+      inputRef?.current?.focus();
+    }
+  }, [inputRef]);
+
   return (
     <input
+      style={{ height: 0, border: 0, padding: 0, margin: 0 }}
+      ref={inputRef}
       value={inputString}
       onChange={handleInputChange}
       onKeyDown={handleKeyPress}

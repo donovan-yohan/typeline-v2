@@ -16,7 +16,7 @@ export const useLetterStyles = createStyles((theme, { actual }: Partial<LetterPr
       letterSpacing: "0.02em",
       transition: "color 0.2s ease",
       ["&:after"]: {
-        content: `"←"`,
+        content: `"${actual}"`,
         color: theme.colors.gray[shade + grayOffset],
         position: "absolute",
         width: "100%",

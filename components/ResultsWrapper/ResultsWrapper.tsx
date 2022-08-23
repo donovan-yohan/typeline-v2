@@ -5,6 +5,7 @@ import { ResultsWrapperProps } from "./ResultsWrapper.definition";
 export const ResultsWrapper = (props: ResultsWrapperProps) => {
   return (
     <Paper style={props.style}>
+      
       <ResultsChart />
     </Paper>
   );

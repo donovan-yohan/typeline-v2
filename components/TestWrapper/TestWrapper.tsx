@@ -1,4 +1,4 @@
-import { Container, Paper } from "@mantine/core";
+import { Container } from "@mantine/core";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 import { useDebounce } from "usehooks-ts";
