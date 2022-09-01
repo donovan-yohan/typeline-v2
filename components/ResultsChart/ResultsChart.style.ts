@@ -3,6 +3,7 @@ import { createStyles } from "@mantine/core";
 export const useResultsChartStyles = createStyles((theme) => ({
   container: {
     height: "500px",
-    backgroundColor: theme.colors[theme.primaryColor][6]
-  }
+    width: "100%",
+    backgroundColor: theme.colors[theme.primaryColor][6],
+  },
 }));

@@ -1,23 +1,48 @@
-import { Chart } from "chart.js";
+import {
+  CategoryScale,
+  Chart,
+  defaults,
+  Legend,
+  LegendItem,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement,
+  Tooltip,
+} from "chart.js";
 import { useRef, useEffect, useState } from "react";
 import { CustomLineProps } from "./CustomLine.definition";
 
+Chart.register(
+  LinearScale,
+  CategoryScale,
+  LineElement,
+  LineController,
+  PointElement,
+  Tooltip,
+  Legend
+);
+
 export default function CustomLine({ data, options, chartHeight }: CustomLineProps) {
-  const [legend, setLegend] = useState([]);
-  const [crossRotColour, setCrossRotColour] = useState("rgb(225,25,25)");
+  defaults.font.family = "Nunito";
+  defaults.font.size = 14;
+  defaults.font.lineHeight = 1.5;
+  defaults.font.weight = "700";
+
+  const [legend, setLegend] = useState<LegendItem[]>([]);
 
   // use a ref to store the chart instance since it it mutable
-  const chartRef = useRef(null);
+  const chartRef = useRef<Chart>();
 
   // callback creates the chart on the canvas element
-  const canvasCallback = (canvas) => {
+  const canvasCallback = (canvas: HTMLCanvasElement) => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (ctx && !chartRef.current) {
       chartRef.current = new Chart(ctx, {
         type: "line",
         data: data,
-        options: options
+        options: options,
       });
     }
   };
@@ -27,7 +52,7 @@ export default function CustomLine({ data, options, chartHeight }: CustomLinePro
     // must verify that the chart exists
     const chart = chartRef.current;
     if (chart) {
-      setLegend(chart.legend.legendItems);
+      setLegend(chart.legend?.legendItems || []);
       chart.data = data;
       chart.options = options;
       chart.update();
@@ -35,21 +60,21 @@ export default function CustomLine({ data, options, chartHeight }: CustomLinePro
   }, [data, options]);
 
   return (
-    <div className='chartContainer'>
-      <div className='overflow'>
-        <div className='legend'>
+    <div className="chartContainer">
+      <div className="overflow">
+        <div className="legend">
           {legend.map((l, i) => {
             return (
               <div
-                className='label legendItem'
+                className="label legendItem"
                 key={i}
                 style={{
-                  color: l.fontColor
+                  color: l.fontColor?.toString(),
                 }}
               >
                 <span
-                  className={l.pointStyle || "circle"}
-                  style={{ backgroundColor: l.fontColor }}
+                  className={l.pointStyle?.toString() || "circle"}
+                  style={{ backgroundColor: l.fontColor?.toString() }}
                 ></span>
                 {l.text}
               </div>
@@ -103,7 +128,7 @@ export default function CustomLine({ data, options, chartHeight }: CustomLinePro
           height: 3px; /* cross thickness */
           border-radius: 4px;
           top: 50%;
-          background-color: ${crossRotColour};
+          background-color: rgb(225, 25, 25);
         }
         .crossRot:before {
           transform: rotate(45deg);

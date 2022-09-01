@@ -3,10 +3,11 @@ import { useAtom } from "jotai";
 import { useEffect } from "react";
 import { useDebounce } from "usehooks-ts";
 import {
+  expectedAtom,
   isFinishedAtom,
   isRunningAtom,
   keypressAtom,
-  wordGeneratorAtom
+  wordGeneratorAtom,
 } from "../../atoms/state.atom";
 import { useWordGenerator } from "../../hooks/useWordGenerator";
 import { KeypressType } from "../../interfaces/typeline";
@@ -36,6 +37,11 @@ export const TestWrapper = (props: TestWrapperProps) => {
 
   const [isRunning, setIsRunning] = useAtom(isRunningAtom);
   const [isFinished] = useAtom(isFinishedAtom);
+  const [, setExpected] = useAtom(expectedAtom);
+
+  useEffect(() => {
+    if (isFinished) setExpected(expectedArray);
+  }, [isFinished]);
 
   return (
     <Container style={props.style}>

@@ -1,4 +1,4 @@
-import { StatType } from "../../interfaces/typeline";
+import { StatType } from "../../../interfaces/typeline";
 
 export const addCorrect = (stat: StatType): StatType => ({
   ...stat,

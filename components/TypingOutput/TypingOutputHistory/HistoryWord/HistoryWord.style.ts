@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
-import { springWiggle } from "../../../styles/animations.style";
-import { rem } from "../../../utils/styles/css.utils";
+import { springWiggle } from "../../../../styles/animations.style";
+import { rem } from "../../../../utils/styles/css.utils";
 
 export const useWordStyles = createStyles((theme) => ({
   word: {

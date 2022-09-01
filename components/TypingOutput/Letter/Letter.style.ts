@@ -1,12 +1,11 @@
-import { css } from "@emotion/css";
 import { createStyles } from "@mantine/core";
+import { useThemeColours } from "../../../hooks/useThemeColours";
 import { springWiggle, wordBounce } from "../../../styles/animations.style";
-import { getPrimaryShade } from "../../../styles/themes";
 import { rem } from "../../../utils/styles/css.utils";
 import { LetterProps } from "./Letter.definition";
 
 export const useLetterStyles = createStyles((theme, { actual }: Partial<LetterProps>) => {
-  const { shade, offset, grayOffset } = getPrimaryShade(theme);
+  const { gray, incorrect, incorrectFaded, highlight } = useThemeColours();
   return {
     letter: {
       position: "relative",
@@ -17,7 +16,7 @@ export const useLetterStyles = createStyles((theme, { actual }: Partial<LetterPr
       transition: "color 0.2s ease",
       ["&:after"]: {
         content: `"${actual}"`,
-        color: theme.colors.gray[shade + grayOffset],
+        color: gray,
         position: "absolute",
         width: "100%",
         textAlign: "center",
@@ -25,34 +24,34 @@ export const useLetterStyles = createStyles((theme, { actual }: Partial<LetterPr
         top: "50%",
         fontSize: "0.66em",
         opacity: 0,
-        transition: "0.3s cubic-bezier(0.27, 0.38, 0.14, 0.99)"
-      }
+        transition: "0.3s cubic-bezier(0.27, 0.38, 0.14, 0.99)",
+      },
     },
     correct: {},
     incorrect: {
-      color: theme.colors[theme.other.errorColor][shade],
+      color: incorrect,
       animation: `${springWiggle} 0.2s cubic-bezier(0, 0.95, 0.25, 1)`,
       ["&:after"]: {
         content: `"${actual}"`,
         top: "75%",
-        opacity: 1
-      }
+        opacity: 1,
+      },
     },
     perfect: {
-      color: theme.colors[theme.primaryColor][shade],
-      animation: `0.25s cubic-bezier(0, 0.5, 0.5, 1) alternate 2 ${wordBounce}`
+      color: highlight,
+      animation: `0.25s cubic-bezier(0, 0.5, 0.5, 1) alternate 2 ${wordBounce}`,
     },
     untyped: {
-      color: theme.colors.gray[shade + grayOffset]
+      color: gray,
     },
     overflow: {
-      color: theme.colors[theme.other.errorColor][shade + offset],
+      color: incorrect,
       textDecoration: "line-through",
-      animation: `${springWiggle} 0.2s cubic-bezier(0, 0.95, 0.25, 1)`
+      animation: `${springWiggle} 0.2s cubic-bezier(0, 0.95, 0.25, 1)`,
     },
     incorrectUntyped: {
-      color: theme.colors[theme.other.errorColor][shade + offset],
-      textDecoration: "underline"
-    }
+      color: incorrectFaded,
+      textDecoration: "underline",
+    },
   };
 });

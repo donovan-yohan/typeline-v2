@@ -1,5 +1,5 @@
-import { KeypressType, StatType } from "../../interfaces/typeline";
-import { BACKSPACE_CHAR, EmptyStatType } from "../utils";
+import { KeypressType, StatType } from "../../../interfaces/typeline";
+import { BACKSPACE_CHAR, EmptyStatType } from "../../utils";
 import {
   addCorrect,
   addCorrected,

@@ -1,5 +1,5 @@
-import { KeypressType } from "../../../interfaces/typeline";
-import { BACKSPACE_CHAR } from "../../utils";
+import { KeypressType } from "../../../../interfaces/typeline";
+import { BACKSPACE_CHAR } from "../../../utils";
 import { generateStats } from "../statsGenerator";
 
 describe("statsGenerator.ts", () => {
