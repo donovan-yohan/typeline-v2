@@ -1,4 +1,4 @@
-import { ChartDataset, ScaleOptionsByType } from "chart.js";
+import { ChartDataset } from "chart.js";
 
 export const ErrorDatasetConfig: Partial<ChartDataset<"line">> = {
   label: "Errors",

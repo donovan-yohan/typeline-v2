@@ -23,7 +23,7 @@ Chart.register(
   Legend
 );
 
-export default function CustomLine({ data, options, chartHeight }: CustomLineProps) {
+export default function CustomLine({ data, options }: CustomLineProps) {
   defaults.font.family = "Nunito";
   defaults.font.size = 14;
   defaults.font.lineHeight = 1.5;
@@ -91,7 +91,7 @@ export default function CustomLine({ data, options, chartHeight }: CustomLinePro
         }
         .overflow {
           overflow: hidden;
-          height: ${chartHeight + "px" || "500px"};
+          height: 100%;
         }
         .legend {
           display: flex;

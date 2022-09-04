@@ -1,9 +1,13 @@
 import { createStyles } from "@mantine/core";
 
-export const useResultsChartStyles = createStyles((theme) => ({
+export const useResultsChartStyles = createStyles(() => ({
   container: {
+    position: "relative",
     height: "500px",
     width: "100%",
-    backgroundColor: theme.colors[theme.primaryColor][6],
+    flex: "1 1 auto",
+    canvas: {
+      width: "100% !important",
+    },
   },
 }));

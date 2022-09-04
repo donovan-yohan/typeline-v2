@@ -191,11 +191,7 @@ export const ResultsChart = (props: ResultsChartProps) => {
 
   return (
     <Paper ref={chartParentRef} style={props.style} className={classes.container}>
-      <CustomLine
-        data={chartData}
-        options={options}
-        chartHeight={(chartParentRef.current?.parentElement?.clientHeight || 0) + "px"}
-      />
+      <CustomLine data={chartData} options={options} />
     </Paper>
   );
 };

@@ -17,8 +17,11 @@ import { TypingInput } from "../TypingInput/TypingInput";
 import { TypingOutput } from "../TypingOutput/TypingOutput";
 import { TypingWrapper } from "../TypingWrapper/TypingWrapper";
 import { TestWrapperProps } from "./TestWrapper.definition";
+import { useTestWrapperStyles } from "./TestWrapper.style";
 
 export const TestWrapper = (props: TestWrapperProps) => {
+  const { classes } = useTestWrapperStyles();
+
   const [keys, setKeys] = useAtom(keypressAtom);
   const [wordGenerator] = useAtom(wordGeneratorAtom);
 
@@ -44,7 +47,7 @@ export const TestWrapper = (props: TestWrapperProps) => {
   }, [isFinished]);
 
   return (
-    <Container style={props.style}>
+    <Container style={props.style} className={classes.container}>
       <TypingInput disabled={isFinished} onType={onType} />
       <TypingWrapper>
         <TypingOutput expected={debouncedExpected} actual={actual} />

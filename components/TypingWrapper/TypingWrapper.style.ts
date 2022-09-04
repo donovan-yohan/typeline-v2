@@ -13,11 +13,10 @@ export const useTypingWrapperStyles = createStyles(
       scrollArea: {
         width: "100%",
         minWidth: "100%",
-        marginTop: 128,
         height: typingHeight,
         overflow: `${scroll ? "scroll" : "hidden"} !important`,
-        transition: "height 0.33s ease-in-out, width 0.33s ease-in-out"
-      }
+        transition: "height 0.33s ease-in-out, width 0.33s ease-in-out",
+      },
     };
   }
 );

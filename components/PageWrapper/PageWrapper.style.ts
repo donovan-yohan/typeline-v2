@@ -4,9 +4,11 @@ export const useStyles = createStyles(() => ({
   pageWrapper: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "100vh"
+    minHeight: "100vh",
   },
   contentWrapper: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
