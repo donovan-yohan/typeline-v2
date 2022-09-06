@@ -4,7 +4,7 @@ import { rem } from "../../../utils/styles/css.utils";
 
 export const useWordStyles = createStyles((theme) => ({
   word: {
-    marginRight: "1rem",
+    marginRight: "1.25rem",
     marginBottom: rem(theme.other.typingConfig.lineSpacing)
   },
   incorrect: {

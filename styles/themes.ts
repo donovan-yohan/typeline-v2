@@ -62,7 +62,7 @@ export const DefaultTheme: MantineTheme = {
     typingConfig: {
       fontSize: 2.5,
       lineHeight: 1.5,
-      lineSpacing: 1.5,
+      lineSpacing: 2,
       linesVisible: 3
     }
   }

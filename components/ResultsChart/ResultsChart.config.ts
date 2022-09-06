@@ -13,6 +13,19 @@ export const ErrorDatasetConfig: Partial<ChartDataset<"line">> = {
   pointHoverBorderWidth: 3,
 };
 
+export const CorrectedDatasetConfig: Partial<ChartDataset<"line">> = {
+  label: "Corrected",
+  fill: false,
+  showLine: false,
+  pointStyle: "cross",
+  yAxisID: "errorAxis",
+  pointRadius: 6,
+  pointBorderWidth: 2,
+  pointHitRadius: 12,
+  pointHoverRadius: 9,
+  pointHoverBorderWidth: 3,
+};
+
 export const AvgWPMDatasetConfig: Partial<ChartDataset<"line">> = {
   label: "Average WPM",
   fill: false,

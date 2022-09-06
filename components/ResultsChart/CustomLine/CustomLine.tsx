@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { useRef, useEffect, useState } from "react";
+import { useThemeColours } from "../../../hooks/useThemeColours";
 import { CustomLineProps } from "./CustomLine.definition";
 
 Chart.register(
@@ -30,6 +31,7 @@ export default function CustomLine({ data, options }: CustomLineProps) {
   defaults.font.weight = "700";
 
   const [legend, setLegend] = useState<LegendItem[]>([]);
+  const { incorrect, foreground } = useThemeColours();
 
   // use a ref to store the chart instance since it it mutable
   const chartRef = useRef<Chart>();
@@ -105,7 +107,8 @@ export default function CustomLine({ data, options }: CustomLineProps) {
         }
 
         .crossRot,
-        .circle {
+        .circle,
+        .cross {
           position: relative;
           display: inline-block;
           min-height: 16px;
@@ -116,25 +119,36 @@ export default function CustomLine({ data, options }: CustomLineProps) {
           margin-top: 6px;
         }
 
-        .crossRot {
+        .crossRot,
+        .cross {
           background-color: transparent !important;
         }
 
         .crossRot:before,
-        .crossRot:after {
+        .crossRot:after,
+        .cross:before,
+        .cross:after {
           position: absolute;
           content: "";
           width: 100%;
           height: 3px; /* cross thickness */
           border-radius: 4px;
           top: 50%;
-          background-color: rgb(225, 25, 25);
+          background-color: ${incorrect};
         }
         .crossRot:before {
           transform: rotate(45deg);
         }
         .crossRot:after {
           transform: rotate(-45deg);
+        }
+
+        .cross:before,
+        .cross:after {
+          background-color: ${foreground};
+        }
+        .cross:after {
+          transform: rotate(90deg);
         }
 
         .circle {

@@ -20,7 +20,7 @@ export const RawWPMTooltip = () => {
         In brackets is the same, but calculated using only <b>correct</b> keystrokes.
       </div>
       <div>
-        <code>correct/ test time</code>
+        <code>correct / test time</code>
       </div>
     </div>
   );

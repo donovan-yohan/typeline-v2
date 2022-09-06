@@ -7,6 +7,7 @@ import { formatTime } from "../../utils/utils";
 import CustomLine from "./CustomLine/CustomLine";
 import {
   AvgWPMDatasetConfig,
+  CorrectedDatasetConfig,
   ErrorDatasetConfig,
   RawWPMDatasetConfig,
 } from "./ResultsChart.config";
@@ -40,15 +41,6 @@ export const ResultsChart = (props: ResultsChartProps) => {
       labels: stats.map((_, i) => i + 1),
       datasets: [
         {
-          ...ErrorDatasetConfig,
-          data: stats.map((s) =>
-            s.incorrectInInterval > 0 ? s.incorrectInInterval : null
-          ),
-          backgroundColor: incorrect,
-          borderColor: incorrect,
-          pointBorderColor: incorrect,
-        },
-        {
           ...AvgWPMDatasetConfig,
           data: stats.map((s) => s.wpm),
           backgroundColor: highlight,
@@ -59,6 +51,24 @@ export const ResultsChart = (props: ResultsChartProps) => {
           data: stats.map((s) => s.raw),
           backgroundColor: foreground,
           borderColor: foreground,
+        },
+        {
+          ...ErrorDatasetConfig,
+          data: stats.map((s) =>
+            s.incorrectInInterval > 0 ? s.incorrectInInterval : null
+          ),
+          backgroundColor: incorrect,
+          borderColor: incorrect,
+          pointBorderColor: incorrect,
+        },
+        {
+          ...CorrectedDatasetConfig,
+          data: stats.map((s) =>
+            s.correctedInInterval > 0 ? s.correctedInInterval : null
+          ),
+          backgroundColor: foreground,
+          borderColor: foreground,
+          pointBorderColor: foreground,
         },
       ],
     };
@@ -152,7 +162,7 @@ export const ResultsChart = (props: ResultsChartProps) => {
       tooltip: {
         titleColor: foreground,
         usePointStyle: true,
-        backgroundColor: fn.darken(background, 0.9),
+        backgroundColor: fn.lighten(background, 0.1),
         boxWidth: 12,
         padding: 16,
         bodySpacing: 4,
