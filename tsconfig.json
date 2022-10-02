@@ -17,7 +17,13 @@
     "noUnusedLocals": true, // Report errors on unused locals
     "noUnusedParameters": true // Report errors on unused parameters
   },
-  "include": ["next-env.d.ts", "additional.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "jest.config.ts",
+    "next-env.d.ts",
+    "additional.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "exclude": ["node_modules"],
   "types": ["@types/node", "@types/jest"]
 }

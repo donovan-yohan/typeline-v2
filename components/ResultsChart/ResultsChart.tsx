@@ -1,4 +1,4 @@
-import { Paper, useMantineTheme } from "@mantine/core";
+import { Paper } from "@mantine/core";
 import { Chart, ChartData, ChartOptions, Color, PointStyle, TooltipItem } from "chart.js";
 import React, { useMemo, useRef } from "react";
 import { useThemeColours } from "../../hooks/useThemeColours";
@@ -32,8 +32,8 @@ const getLabelString = (context: TooltipItem<"line">) => {
 
 export const ResultsChart = (props: ResultsChartProps) => {
   const { classes } = useResultsChartStyles();
-  const { fn } = useMantineTheme();
-  const { incorrect, highlight, foreground, background } = useThemeColours();
+  const { incorrect, highlight, foreground, background, backgroundGray } =
+    useThemeColours();
 
   const stats = useMemo(() => generateChartStats(props.rawStats), [props.rawStats]);
   const chartData: ChartData<"line"> = useMemo(() => {
@@ -162,7 +162,7 @@ export const ResultsChart = (props: ResultsChartProps) => {
       tooltip: {
         titleColor: foreground,
         usePointStyle: true,
-        backgroundColor: fn.lighten(background, 0.1),
+        backgroundColor: backgroundGray,
         boxWidth: 12,
         padding: 16,
         bodySpacing: 4,

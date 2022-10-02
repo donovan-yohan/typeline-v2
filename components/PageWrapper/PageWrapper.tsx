@@ -1,5 +1,7 @@
-import { Header, Footer, Paper, Group } from "@mantine/core";
-import { ColorSchemeToggle } from "../ColorSchemeToggle/ColorSchemeToggle";
+import { Paper } from "@mantine/core";
+import { PageFooter } from "./PageFooter/PageFooter";
+
+import { PageHeader } from "./PageHeader/PageHeader";
 import { PageWrapperProps } from "./PageWrapper.definition";
 import { useStyles } from "./PageWrapper.style";
 
@@ -8,13 +10,9 @@ export function PageWrapper(props: PageWrapperProps) {
 
   return (
     <div className={classes.pageWrapper}>
-      <Header height={"64px"}>
-        <Group>
-          typeline <ColorSchemeToggle />
-        </Group>
-      </Header>
+      <PageHeader />
       <Paper className={classes.contentWrapper}>{props.children}</Paper>
-      <Footer height={"64px"}>Copyright</Footer>
+      <PageFooter />
     </div>
   );
 }

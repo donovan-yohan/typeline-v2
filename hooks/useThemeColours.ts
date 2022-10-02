@@ -14,5 +14,6 @@ export const useThemeColours = () => {
     gray: theme.colors.gray[shade + grayOffset],
     background: isDarkMode ? theme.colors.dark[7] : theme.white,
     foreground: isDarkMode ? theme.white : theme.black,
+    backgroundGray: isDarkMode ? theme.colors.dark[6] : theme.colors.gray[0],
   };
 };

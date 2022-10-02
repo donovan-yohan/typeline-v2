@@ -59,7 +59,7 @@ export default function CustomLine({ data, options }: CustomLineProps) {
       chart.options = options;
       chart.update();
     }
-  }, [data, options]);
+  }, [data, options, foreground, incorrect]);
 
   return (
     <div className="chartContainer">

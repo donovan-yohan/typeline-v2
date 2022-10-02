@@ -2,15 +2,18 @@ import { useAtom } from "jotai";
 import { useRef } from "react";
 import { TypingOutputHistoryProps } from "./TypingOutputHistory.definition";
 import { useTypingOutputStyles } from "./TypingOutputHistory.style";
-import { Word } from "../Word/Word";
-import { currentWordCorrectAtom, wordOffsetAtom } from "../Word/Word.atom";
+import { currentWordCorrectAtom } from "../Word/Word.atom";
 import { TypingHighlight } from "../TypingHighlight/TypingHighlight";
+import { HistoryWord } from "./HistoryWord/HistoryWord";
+import { historyWordOffsetAtom } from "./HistoryWord/HistoryWord.atom";
+
+const WORD_BUFFER = 5;
 
 export const TypingOutputHistory = (props: TypingOutputHistoryProps) => {
-  const { expected, actual } = props;
+  const { expected, keypresses } = props;
   const { classes } = useTypingOutputStyles();
 
-  const [wordOffset] = useAtom(wordOffsetAtom);
+  const [wordOffset] = useAtom(historyWordOffsetAtom);
   const [currentWordCorrect] = useAtom(currentWordCorrectAtom);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -18,15 +21,14 @@ export const TypingOutputHistory = (props: TypingOutputHistoryProps) => {
   return (
     <div className={classes.wrapper} ref={ref}>
       <TypingHighlight offset={wordOffset} correct={currentWordCorrect} />
-      {expected.map((expected, index) => {
-        const actualWord = actual[index];
+      {expected.slice(0, keypresses.length + WORD_BUFFER).map((expected, index) => {
         return (
-          <Word
+          <HistoryWord
             id={`word-history-${index}`}
-            actual={actualWord || ""}
+            keypresses={keypresses[index] || []}
             expected={expected}
-            passed={index < actual.length - 1}
-            current={index === actual.length - 1}
+            passed={index < keypresses.length - 1}
+            current={index === keypresses.length - 1}
             key={`word-history-${index}`}
             parentRef={ref}
             index={index}

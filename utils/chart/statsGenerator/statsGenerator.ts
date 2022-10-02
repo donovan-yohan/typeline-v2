@@ -4,7 +4,7 @@ import {
   addCorrect,
   addCorrected,
   addIncorrect,
-  addIncorrectWord
+  addIncorrectWord,
 } from "./statsGenerator.utils";
 
 export const generateStats = (
@@ -27,36 +27,39 @@ export const generateStats = (
 
     const curr = actual[actualIndex];
 
-    if (key === " ") {
-      if (curr === expected[actualIndex]) stats[timeIndex] = addCorrect(stats[timeIndex]);
-      else stats[timeIndex] = addIncorrect(stats[timeIndex]);
+    if (timeIndex < totalTime) {
+      if (key === " ") {
+        if (curr === expected[actualIndex])
+          stats[timeIndex] = addCorrect(stats[timeIndex]);
+        else stats[timeIndex] = addIncorrect(stats[timeIndex]);
 
-      actualIndex++;
-    } else if (key === BACKSPACE_CHAR) {
-      if (curr) {
-        if (curr.slice(-1) !== expected[actualIndex][curr.length - 1])
-          stats[timeIndex] = addCorrected(stats[timeIndex]);
+        actualIndex++;
+      } else if (key === BACKSPACE_CHAR) {
+        if (curr) {
+          if (curr.slice(-1) !== expected[actualIndex][curr.length - 1])
+            stats[timeIndex] = addCorrected(stats[timeIndex]);
 
-        actual[actualIndex] = actual[actualIndex].slice(0, -1);
+          actual[actualIndex] = actual[actualIndex].slice(0, -1);
+        } else {
+          const lastActual = actual[actualIndex - 1];
+          const lastExpected = expected[actualIndex - 1];
+          if (lastActual && lastExpected && lastActual !== lastExpected)
+            stats[timeIndex] = addCorrected(stats[timeIndex]);
+
+          actualIndex--;
+        }
       } else {
-        const lastActual = actual[actualIndex - 1];
-        const lastExpected = expected[actualIndex - 1];
-        if (lastActual && lastExpected && lastActual !== lastExpected)
-          stats[timeIndex] = addCorrected(stats[timeIndex]);
-
-        actualIndex--;
+        if (
+          curr.length < expected[actualIndex].length &&
+          key === expected[actualIndex][curr.length]
+        )
+          stats[timeIndex] = addCorrect(stats[timeIndex]);
+        else {
+          stats[timeIndex] = addIncorrect(stats[timeIndex]);
+          stats[timeIndex] = addIncorrectWord(stats[timeIndex], expected[actualIndex]);
+        }
+        actual[actualIndex] += key;
       }
-    } else {
-      if (
-        curr.length < expected[actualIndex].length &&
-        key === expected[actualIndex][curr.length]
-      )
-        stats[timeIndex] = addCorrect(stats[timeIndex]);
-      else {
-        stats[timeIndex] = addIncorrect(stats[timeIndex]);
-        stats[timeIndex] = addIncorrectWord(stats[timeIndex], expected[actualIndex]);
-      }
-      actual[actualIndex] += key;
     }
   });
   return stats;

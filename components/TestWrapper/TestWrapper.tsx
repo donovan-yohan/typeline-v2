@@ -1,6 +1,5 @@
-import { Container } from "@mantine/core";
 import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import {
   expectedAtom,
@@ -11,7 +10,7 @@ import {
 } from "../../atoms/state.atom";
 import { useWordGenerator } from "../../hooks/useWordGenerator";
 import { KeypressType } from "../../interfaces/typeline";
-import { keypressToArray } from "../../utils/utils";
+import { typeOnString } from "../../utils/utils";
 import { Timer } from "../Timer/Timer";
 import { TypingInput } from "../TypingInput/TypingInput";
 import { TypingOutput } from "../TypingOutput/TypingOutput";
@@ -25,10 +24,11 @@ export const TestWrapper = (props: TestWrapperProps) => {
   const [keys, setKeys] = useAtom(keypressAtom);
   const [wordGenerator] = useAtom(wordGeneratorAtom);
 
-  const actual = keypressToArray(keys);
+  const [actual, setActual] = useState("");
 
   const onType = ({ key, timestamp }: KeypressType) => {
     setKeys((keys) => [...keys, { key, timestamp }]);
+    setActual((actual) => typeOnString(key, actual));
   };
 
   useEffect(() => {
@@ -47,12 +47,12 @@ export const TestWrapper = (props: TestWrapperProps) => {
   }, [isFinished]);
 
   return (
-    <Container style={props.style} className={classes.container}>
+    <div style={props.style} className={classes.container}>
       <TypingInput disabled={isFinished} onType={onType} />
       <TypingWrapper>
-        <TypingOutput expected={debouncedExpected} actual={actual} />
+        <TypingOutput expected={debouncedExpected} actual={actual.split(" ")} />
       </TypingWrapper>
       <Timer isRunning={isRunning} />
-    </Container>
+    </div>
   );
 };

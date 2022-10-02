@@ -8,7 +8,7 @@ export const EmptyStatType: StatType = {
   correct: 0,
   incorrect: 0,
   corrected: 0,
-  incorrectWords: []
+  incorrectWords: [],
 };
 
 export const keypressToString = (keypresses: KeypressType[]): string => {
@@ -27,11 +27,62 @@ export const keypressToArray = (keypresses: KeypressType[]): string[] => {
   return keypressToString(keypresses).split(" ");
 };
 
+export const keypressesToKeypressArray = (
+  keypresses: KeypressType[]
+): KeypressType[][] => {
+  let keypressesArray: KeypressType[][] = [[]];
+  let index = 0;
+  let letters: number = 0;
+
+  keypresses.forEach((keypress) => {
+    if (keypress.key === " ") {
+      // push keypress to current word
+      keypressesArray[index].push(keypress);
+
+      index++;
+      if (!keypressesArray[index]) keypressesArray.push([]);
+      letters = 0;
+    } else if (keypress.key === BACKSPACE_CHAR) {
+      if (letters === 0) {
+        index--;
+        letters = keypressesToLength(keypressesArray[index]);
+      } else letters--;
+
+      // push keypress to current word, or previous if empty
+      keypressesArray[index].push(keypress);
+    } else {
+      keypressesArray[index].push(keypress);
+      letters++;
+    }
+  });
+
+  return keypressesArray;
+};
+
+const keypressesToLength = (keypresses: KeypressType[]): number => {
+  let length = 0;
+
+  keypresses.forEach((keypress) => {
+    if (keypress.key === BACKSPACE_CHAR) length--;
+    else length++;
+  });
+
+  return length;
+};
+
+export const typeOnString = (key: string, str: string): string => {
+  if (key === BACKSPACE_CHAR) {
+    return str.slice(0, -1);
+  } else {
+    return `${str}${key}`;
+  }
+};
+
 export const createTypeUrl = (seed = generateSeed(), time = 30) => ({
   pathname: `/${seed}`,
   query: {
-    t: time
-  }
+    t: time,
+  },
 });
 
 const isMutableRefObject = <T>(thing: any): thing is MutableRefObject<T> =>
@@ -58,6 +109,6 @@ export const mergeRefs = <T>(...refs: React.Ref<T>[]) => {
 export function formatTime(time: number): string {
   return `${Math.floor(time / 60)}:${(time % 60).toLocaleString("en-US", {
     minimumIntegerDigits: 2,
-    useGrouping: false
+    useGrouping: false,
   })}`;
 }

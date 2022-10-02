@@ -20,12 +20,12 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   return (
     <>
       <Head>
-        <title>Mantine next example</title>
+        <title>typeline Typing Test</title>
         <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width'
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <link rel='shortcut icon' href='/favicon.svg' />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
 
       <ColorSchemeProvider
@@ -37,28 +37,28 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
             {
               "@font-face": {
                 fontFamily: "Comfortaa",
-                src: `url('/fonts/Comfortaa-Regular.ttf')`
-              }
+                src: `url('/fonts/Comfortaa-Regular.ttf')`,
+              },
             },
             {
               "@font-face": {
                 fontFamily: "Nunito",
-                src: `url('/fonts/Nunito-Regular.ttf')`
-              }
+                src: `url('/fonts/Nunito-Regular.ttf')`,
+              },
             },
             {
               "@font-face": {
                 fontFamily: "Nunito",
                 src: `url('/fonts/Nunito-ExtraBold.ttf')`,
-                fontWeight: "bold"
-              }
-            }
+                fontWeight: "bold",
+              },
+            },
           ]}
         />
         <MantineProvider
           theme={{
             ...DefaultTheme,
-            colorScheme
+            colorScheme,
           }}
           withGlobalStyles
           withNormalizeCSS
@@ -73,5 +73,5 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
 }
 
 App.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
-  colorScheme: getCookie("mantine-color-scheme", ctx) || "light"
+  colorScheme: getCookie("mantine-color-scheme", ctx) || "light",
 });

@@ -1,8 +1,9 @@
 import { OffsetType } from "../../../hooks/useOffset";
+import { KeypressType } from "../../../interfaces/typeline";
 
 export interface TypingOutputHistoryProps {
   expected: string[];
-  actual: string[];
+  keypresses: KeypressType[][];
   finished?: boolean;
 }
 

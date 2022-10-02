@@ -54,3 +54,9 @@ export const useGlobalStyles = createStyles(() => {
     },
   };
 });
+
+export const GlobalStyleConfig = {
+  Transition: {
+    Default: "all 0.3s ease-in-out;",
+  },
+};

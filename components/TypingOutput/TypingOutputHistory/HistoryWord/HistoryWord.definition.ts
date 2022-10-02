@@ -1,6 +1,8 @@
+import { KeypressType } from "../../../../interfaces/typeline";
+
 export interface HistoryWordProps {
   expected: string;
-  actual: string;
+  keypresses: KeypressType[];
   id: string;
   passed: boolean;
   current: boolean;
