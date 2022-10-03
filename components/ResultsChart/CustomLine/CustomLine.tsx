@@ -122,6 +122,7 @@ export default function CustomLine({ data, options }: CustomLineProps) {
         .crossRot,
         .cross {
           background-color: transparent !important;
+          margin-top: 4px;
         }
 
         .crossRot:before,

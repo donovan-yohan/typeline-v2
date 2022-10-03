@@ -96,7 +96,7 @@ export const ResultsChart = (props: ResultsChartProps) => {
         min: hasLowWPM ? -0.99 : 0,
         max: needsMinHeight ? 50 : undefined,
         suggestedMin: 0,
-        grace: "5%",
+        grace: "10%",
         ticks: {
           font: {
             weight: "400",
