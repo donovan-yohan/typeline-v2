@@ -11,6 +11,15 @@ export const GameContainer = () => {
   const [transitionFinished, setTransitionFinished] = useState(false);
 
   return (
+    /**
+     * TODO: instead of swapping them entirely, transition within the testwrapper and just add the resultsChart to the bottom
+     * so that it can leverage the natural scrolling of the page
+     *
+     * change between TypingOutput and HistoryTypingOutput
+     * smooth scroll down, wait for duration of scroll, swap out components above with crossfade (to cover in case user scrolls up)
+     * https://stackoverflow.com/questions/50074823/how-can-i-keep-scroll-position-when-add-dom-to-top
+     */
+
     <Container>
       <Transition
         mounted={!isFinished}

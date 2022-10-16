@@ -11,7 +11,7 @@ export function PageFooter() {
   return (
     <div className={classes.footer} style={{ opacity: isRunning ? 0 : 1 }}>
       <Container className={classes.footerContent}>
-        <span>typeline Typing Test ©2021</span>
+        <span>typeline Typing Test ©2022</span>
         <span>
           Made with love by{" "}
           <a href="https://donovanyohan.com" target="_blank">
