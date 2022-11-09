@@ -43,12 +43,12 @@ export const Timer = (props: TimerProps) => {
     <span className={classes.timerWrapper}>
       <Slider
         {...sliderProps}
-        min={0}
+        min={1}
         max={time}
         value={time - currentTime}
         className={classes.timer}
       />
-      <div className={classes.timerText}>{formatTime(time)}</div>
+      <div className={classes.timerText}>{formatTime(time - currentTime)}</div>
     </span>
   );
 };
