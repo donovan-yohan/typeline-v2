@@ -35,7 +35,7 @@ export const TestWrapper = (props: TestWrapperProps) => {
     if (keys.length > 0 && !isRunning) setIsRunning(true);
   }, [keys]);
 
-  const expectedArray = useWordGenerator(wordGenerator, actual.length);
+  const expectedArray = useWordGenerator(wordGenerator, actual.split(" ").length);
   const debouncedExpected = useDebounce(expectedArray, 10);
 
   const [isRunning, setIsRunning] = useAtom(isRunningAtom);
